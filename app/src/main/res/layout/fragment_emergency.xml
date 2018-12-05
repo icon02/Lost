@@ -33,7 +33,7 @@
             android:layout_marginStart="138dp"
             android:layout_marginEnd="138dp"
             android:layout_marginBottom="13dp"
-            android:text="Current Location:"
+            android:text="@string/emergency_location_text"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -45,7 +45,7 @@
             android:layout_marginStart="94dp"
             android:layout_marginEnd="94dp"
             android:layout_marginBottom="87dp"
-            android:text="48.334986, 14.323784"
+            android:text="@string/emergency_dummy_location"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

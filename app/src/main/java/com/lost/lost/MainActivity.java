@@ -16,6 +16,7 @@ import com.lost.lost.fragments.AddFriendFragment;
 import com.lost.lost.fragments.EmergencyFragment;
 import com.lost.lost.fragments.FriendsFragment;
 import com.lost.lost.fragments.MapsFragment;
+import com.lost.lost.fragments.PersProfileFragment;
 import com.lost.lost.javaRes.mainApp.MainApp;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FragmentManager fragmentManager;
     private EmergencyFragment emergencyFragment;
     private AddFriendFragment addFriendFragment;
+    private PersProfileFragment persProfileFragment;
 
     MenuItem addFriend_MenuItem;
 
@@ -65,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         emergencyFragment.setApp(app);
         addFriendFragment = new AddFriendFragment();
         addFriendFragment.setApp(app);
+        persProfileFragment = new PersProfileFragment();
+        persProfileFragment.setApp(app);
+
+
     }
 
     @Override
@@ -121,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_share) {
 
+        } else if (id == R.id.nav_personal){
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, persProfileFragment).commit();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
