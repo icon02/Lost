@@ -12,7 +12,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--activity_main_drawer-->
-    <string name="main_drawer_item_maps">Maps</string>
+    <string name="main_drawer_item_maps">Map </string>
     <string name="main_drawer_item_friends">Friends</string>
     <string name="main_drawer_item_emergency">Emergency</string>
     <string name="main_drawer_item_settings">Settings</string>
