@@ -21,4 +21,15 @@
 
 
     <string name="list_item_enable">Show on Map</string>
+
+    <string name="add_friend_name">Name</string>
+    <string name="add_friend_qr_descriptor">QR scanner</string>
+
+    <string name="emergency_location_text">Your current location:</string>
+    <string name="emergency_dummy_location">48.334986, 14.323784</string>
+
+    <string name="personal_id_text">Your ID:</string>
+    <string name="personal_qr_code_descriptor">Your personal QR code</string>
+    <string name="personal_dummy_qr_code">fe80:12::14</string>
+
 </resources>
