@@ -34,6 +34,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(48.334986, 14.323784);

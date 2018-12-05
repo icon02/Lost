@@ -10,13 +10,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ImageView;
 
 import com.lost.lost.fragments.AddFriendFragment;
 import com.lost.lost.fragments.EmergencyFragment;
 import com.lost.lost.fragments.FriendsFragment;
 import com.lost.lost.fragments.MapsFragment;
 import com.lost.lost.fragments.PersProfileFragment;
+import com.lost.lost.fragments.SettingsFragment;
 import com.lost.lost.javaRes.mainApp.MainApp;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EmergencyFragment emergencyFragment;
     private AddFriendFragment addFriendFragment;
     private PersProfileFragment persProfileFragment;
+    private SettingsFragment settingsFragment;
+
+    ImageView persProfile;
 
     MenuItem addFriend_MenuItem;
 
@@ -53,7 +57,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        /*
+        persProfile = findViewById(R.id.persProfile_Button);
+        persProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager.beginTransaction().replace(R.id.fragment_container, new PersProfileFragment()).commit();
+            }
+        });
+        */
         fragmentManager.beginTransaction().replace(R.id.fragment_container, mapsFragment).commit();
     }
 
@@ -69,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         addFriendFragment.setApp(app);
         persProfileFragment = new PersProfileFragment();
         persProfileFragment.setApp(app);
+        settingsFragment = new SettingsFragment();
+        settingsFragment.setApp(app);
 
 
     }
@@ -122,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_emergency) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container, emergencyFragment).commit();
         } else if (id == R.id.nav_manage) {
-
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
         } else if (id == R.id.nav_aboutUs) {
 
         } else if (id == R.id.nav_share) {
