@@ -19,8 +19,8 @@
             android:layout_marginStart="61dp"
             android:layout_marginTop="56dp"
             android:layout_marginEnd="61dp"
-            android:src="@drawable/common_google_signin_btn_icon_dark"
             android:contentDescription="@string/personal_qr_code_descriptor"
+            android:src="@mipmap/dummy_qr_code"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
