@@ -37,7 +37,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(48.334986, 14.323784);
-        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        map.addMarker(new MarkerOptions().position(sydney).title("My Position"));
         map.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
