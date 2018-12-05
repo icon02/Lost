@@ -11,7 +11,7 @@
             android:title="@string/main_drawer_item_maps" />
         <item
             android:id="@+id/nav_friends"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/contact_icon_2x"
             android:title="@string/main_drawer_item_friends" />
         <item
             android:id="@+id/nav_emergency"
@@ -23,7 +23,7 @@
             android:title="@string/main_drawer_item_settings" />
         <item
             android:id="@+id/nav_personal"
-
+            android:icon="@mipmap/account_icon_2x"
             android:title="@string/nav_personal"
             />
     </group>
