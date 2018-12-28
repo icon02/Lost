@@ -11,7 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lost.lost.fragments.AddFriendFragment;
 import com.lost.lost.fragments.EmergencyFragment;
 import com.lost.lost.fragments.FriendsFragment;
@@ -29,13 +32,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PersProfileFragment persProfileFragment;
     private SettingsFragment settingsFragment;
 
+
     ImageView persProfile;
 
     MenuItem addFriend_MenuItem;
 
-
     MapsFragment mapsFragment;
     FriendsFragment friendsFragment;
+
+    //UI
+    private TextView mUid;
+
+    //Firebase
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String uid = currentUser.getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         /*
         persProfile = findViewById(R.id.persProfile_Button);

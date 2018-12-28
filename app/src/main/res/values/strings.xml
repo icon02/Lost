@@ -33,4 +33,11 @@
     <string name="personal_qr_code_descriptor">Your personal QR code</string>
     <string name="personal_dummy_qr_code">fe80:12::14</string>
 
+    <string name="login_button">Log In</string>
+    <string name="create_button">Create new Account</string>
+    <string name="email">Email :</string>
+    <string name="password">Passwort :</string>
+
+    <string name="logOut">Log Out</string>
+
 </resources>

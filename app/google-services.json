@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "720424823292",
+    "firebase_url": "https://lost-a9420.firebaseio.com",
+    "project_id": "lost-a9420",
+    "storage_bucket": "lost-a9420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720424823292:android:fce0f371f5403bcd",
+        "android_client_info": {
+          "package_name": "com.lost.lost"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720424823292-f2pckahfhrve0ioq3emgce8crjlj67eb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lost.lost",
+            "certificate_hash": "6a8bbccb9029adef11d1f0981c7f8c2763646bf9"
+          }
+        },
+        {
+          "client_id": "720424823292-kja3rgcilud03b3lu58fr2k7thhqjsgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0VIQ10whfLega4Ue6_20sdfav47CjSEw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720424823292-kja3rgcilud03b3lu58fr2k7thhqjsgc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
