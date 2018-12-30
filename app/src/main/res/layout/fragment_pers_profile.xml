@@ -34,13 +34,13 @@
             android:layout_marginEnd="184dp"
             android:layout_marginBottom="18dp"
             android:text="@string/personal_id_text"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
+            app:layout_constraintBottom_toTopOf="@+id/persProfile_uid"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/persProfile_uid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="136dp"
