@@ -13,4 +13,9 @@
         android:id="@+id/action_logOut"
         android:orderInCategory="101"
         android:title="@string/logOut" />
+    <!-- TODO: deactivate before presentation -->
+    <item
+        android:id="@+id/crash"
+        android:orderInCategory="102"
+        android:title="Force Crash" />
 </menu>

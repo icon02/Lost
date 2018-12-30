@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lost.lost.fragments.AddFriendFragment;
@@ -127,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FirebaseAuth.getInstance().signOut();
             Intent logOut = new Intent(this, LogInActivity.class);
             startActivity(logOut);
+            //TODO: deactivate before presentation!!
+        } else if (id == R.id.crash){
+            Crashlytics.getInstance().crash(); //Force crash
         }
 
         return super.onOptionsItemSelected(item);
