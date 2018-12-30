@@ -13,15 +13,16 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/qrCodeImage"
             android:layout_width="262dp"
             android:layout_height="240dp"
             android:layout_marginStart="61dp"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="76dp"
             android:layout_marginEnd="61dp"
             android:contentDescription="@string/personal_qr_code_descriptor"
             android:src="@mipmap/dummy_qr_code"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,24 +33,22 @@
             android:layout_marginStart="184dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="184dp"
-            android:layout_marginBottom="18dp"
             android:text="@string/personal_id_text"
-            app:layout_constraintBottom_toTopOf="@+id/persProfile_uid"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            app:layout_constraintTop_toBottomOf="@+id/qrCodeImage" />
 
         <TextView
             android:id="@+id/persProfile_uid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
-            android:layout_marginEnd="136dp"
-            android:layout_marginBottom="120dp"
+            android:layout_marginTop="8dp"
             android:text="@string/personal_dummy_qr_code"
+            android:textAlignment="center"
             android:textSize="10pt"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/qrCodeImage"
+            app:layout_constraintStart_toStartOf="@+id/qrCodeImage"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
