@@ -1,5 +1,6 @@
 package com.lost.lost;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
@@ -11,7 +12,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.crashlytics.android.Crashlytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.lost.lost.fragments.AddFriendFragment;
 import com.lost.lost.fragments.EmergencyFragment;
 import com.lost.lost.fragments.FriendsFragment;
@@ -29,13 +34,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private PersProfileFragment persProfileFragment;
     private SettingsFragment settingsFragment;
 
+
     ImageView persProfile;
 
     MenuItem addFriend_MenuItem;
 
-
     MapsFragment mapsFragment;
     FriendsFragment friendsFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         /*
         persProfile = findViewById(R.id.persProfile_Button);
@@ -117,6 +124,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if(id == R.id.addFriend_MenuItem) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container, addFriendFragment).commit();
             return true;
+        } else if(id == R.id.action_logOut){
+            FirebaseAuth.getInstance().signOut();
+            Intent logOut = new Intent(this, LogInActivity.class);
+            startActivity(logOut);
+            //TODO: deactivate before presentation!!
+        } else if (id == R.id.crash){
+            Crashlytics.getInstance().crash(); //Force crash
         }
 
         return super.onOptionsItemSelected(item);
