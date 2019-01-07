@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "720424823292-57iag639m7p7eors8l0092f8uap47rs1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lost.lost",
+            "certificate_hash": "5d41aeacf6e528dce40370c6defcb965a5b254a7"
+          }
+        },
+        {
           "client_id": "720424823292-kja3rgcilud03b3lu58fr2k7thhqjsgc.apps.googleusercontent.com",
           "client_type": 3
         }
