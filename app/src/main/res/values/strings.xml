@@ -42,4 +42,6 @@
 
     <string name="logOut">Log Out</string>
 
+    <string name="tracking_enabled_notif">Tracking is now enabled</string>
+    <string name="firebase_path">location</string>
 </resources>
