@@ -43,12 +43,14 @@
             android:id="@+id/persProfile_uid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="137dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="136dp"
             android:text="@string/personal_dummy_qr_code"
             android:textAlignment="center"
-            android:textSize="10pt"
-            app:layout_constraintEnd_toEndOf="@+id/qrCodeImage"
-            app:layout_constraintStart_toStartOf="@+id/qrCodeImage"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
