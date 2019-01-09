@@ -2,13 +2,35 @@ package com.lost.lost.javaRes.mainApp;
 
 import android.widget.ImageView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Timer;
+
 public class MainApp implements Runnable {
 
-    private boolean isRunning = false;
-    ImageView loadingIcon;
+    private final String myUserID;
+    private Timer timer;
 
-    public void setLoadingIcon(ImageView icon) {
-        loadingIcon = icon;
+    DatabaseReference database;
+    DatabaseReference databaseMyData;
+
+
+    private boolean isRunning = false;
+
+
+
+
+    public MainApp(String myUserID) {
+        this.myUserID = myUserID;
+        timer = new Timer();
+    }
+
+    public static String verifyEMail(String email) {
+        DatabaseReference temp = FirebaseDatabase.getInstance().getReference();
+        FirebaseDatabase database = temp.getDatabase();
+
+        return null;
     }
 
     @Override
@@ -21,4 +43,12 @@ public class MainApp implements Runnable {
     public boolean isRunning() {
         return isRunning;
     }
+
+    public boolean syncMyLocation() {
+
+        return false;
+    }
+
+
+    public String MyUserID() { return myUserID; }
 }
