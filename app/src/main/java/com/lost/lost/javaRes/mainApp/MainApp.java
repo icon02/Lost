@@ -1,6 +1,5 @@
 package com.lost.lost.javaRes.mainApp;
 
-import android.widget.ImageView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -16,7 +15,8 @@ public class MainApp implements Runnable {
     DatabaseReference databaseMyData;
 
 
-    private boolean isRunning = false;
+    private boolean isRunning;
+    private boolean isLoading;
 
 
 
@@ -24,25 +24,32 @@ public class MainApp implements Runnable {
     public MainApp(String myUserID) {
         this.myUserID = myUserID;
         timer = new Timer();
+        isRunning = false;
+        isLoading = false;
     }
 
     public static String verifyEMail(String email) {
         DatabaseReference temp = FirebaseDatabase.getInstance().getReference();
-        FirebaseDatabase database = temp.getDatabase();
+
 
         return null;
     }
 
     @Override
     public void run() {
+        isLoading = true;
         isRunning = true;
 
+        isLoading = false;
+
+        //TODO sync
         isRunning = false;
     }
 
     public boolean isRunning() {
         return isRunning;
     }
+    public boolean isLoading() { return isLoading; }
 
     public boolean syncMyLocation() {
 

@@ -2,26 +2,30 @@ package com.lost.lost.friend;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
+
 public class Friend {
 
     private String name;
-    private LatLng pos;
-    private int dataBaseId;
+    private ArrayList<LatLng> pos;
+    private String userID;
 
-    public Friend(String name, LatLng pos) {
+
+    public Friend(String userID, String name) {
         this.name = name;
-        this.pos = pos;
+        this.userID = userID;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getDataBaseId() {
-        return dataBaseId;
+    public String getUserID() {
+        return userID;
     }
 
     public LatLng getCurrentPosition() {
-        return pos;
+        return pos.get(pos.size() -1);
     }
 }
