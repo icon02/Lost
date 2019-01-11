@@ -1,14 +1,9 @@
 package com.lost.lost;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,9 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.lost.lost.fragments.AddFriendFragment;
@@ -30,7 +23,6 @@ import com.lost.lost.fragments.PersProfileFragment;
 import com.lost.lost.fragments.SettingsFragment;
 import com.lost.lost.javaRes.account.LogInActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
-import com.lost.lost.javaRes.services.TrackingService;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -144,9 +136,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FirebaseAuth.getInstance().signOut();
             Intent logOut = new Intent(this, LogInActivity.class);
             startActivity(logOut);
-            //TODO: deactivate before presentation!!
-        } else if (id == R.id.crash){
-            Crashlytics.getInstance().crash(); //Force crash
+        } else if (id == R.id.refresh){
+            Intent refresh = new Intent(this, MapsFragment.class);
+            startActivity(refresh);
         }
 
         return super.onOptionsItemSelected(item);

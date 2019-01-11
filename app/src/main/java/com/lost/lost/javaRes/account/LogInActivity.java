@@ -16,7 +16,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.lost.lost.R;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lost.lost.javaRes.services.SplashActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
 
@@ -36,16 +36,18 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(com.lost.lost.R.layout.activity_log_in);
 
+        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        
         //fields
-        mEmailField = findViewById(R.id.auth_email);
-        mPasswordField = findViewById(R.id.auth_password);
+        mEmailField = findViewById(com.lost.lost.R.id.auth_email);
+        mPasswordField = findViewById(com.lost.lost.R.id.auth_password);
 
         //buttons
-        findViewById(R.id.auth_create_button).setOnClickListener(this);
-        findViewById(R.id.auth_logIn_button).setOnClickListener(this);
-        findViewById(R.id.auth_password_reset).setOnClickListener(this);
+        findViewById(com.lost.lost.R.id.auth_create_button).setOnClickListener(this);
+        findViewById(com.lost.lost.R.id.auth_logIn_button).setOnClickListener(this);
+        findViewById(com.lost.lost.R.id.auth_password_reset).setOnClickListener(this);
 
         //init auth
         mAuth = FirebaseAuth.getInstance();
@@ -112,12 +114,12 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         int i = v.getId();
 
-        if (i == R.id.auth_create_button){
+        if (i == com.lost.lost.R.id.auth_create_button){
             Intent create = new Intent(this, CreateAccountActivity.class);
             startActivity(create);
-        } else if (i == R.id.auth_logIn_button){
+        } else if (i == com.lost.lost.R.id.auth_logIn_button){
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        } else if (i == R.id.auth_password_reset){
+        } else if (i == com.lost.lost.R.id.auth_password_reset){
             Intent reset = new Intent(this, PasswordActivity.class);
             startActivity(reset);
         }
