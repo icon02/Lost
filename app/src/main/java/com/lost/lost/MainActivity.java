@@ -17,7 +17,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -29,7 +28,9 @@ import com.lost.lost.fragments.FriendsFragment;
 import com.lost.lost.fragments.MapsFragment;
 import com.lost.lost.fragments.PersProfileFragment;
 import com.lost.lost.fragments.SettingsFragment;
+import com.lost.lost.javaRes.account.LogInActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
+import com.lost.lost.javaRes.services.TrackingService;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,7 +49,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MapsFragment mapsFragment;
     FriendsFragment friendsFragment;
 
-    private static final int PERMISSION_REQUEST = 100;
+
+    private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String uID;
 
 
     @Override
@@ -71,21 +74,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        uID = currentUser.getUid();
 
-        //check if GPS is enabled
-        LocationManager lm = (LocationManager)getSystemService(LOCATION_SERVICE);
-        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            finish();
-        }
 
-        //check if the app has access to the location permission
-        int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-        if (permission == PackageManager.PERMISSION_GRANTED){
-            startTrackingService();
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST);
-        }
         /*
         persProfile = findViewById(R.id.persProfile_Button);
         persProfile.setOnClickListener(new View.OnClickListener() {
@@ -98,20 +90,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager.beginTransaction().replace(R.id.fragment_container, mapsFragment).commit();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]
-            grantResults) {
 
-        if (requestCode == PERMISSION_REQUEST && grantResults.length == 1
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            startTrackingService();
-        } else {
-            Toast.makeText(this, "Please enable location services to allow GPS tracking", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void init() {
-        app = new MainApp();
+        app = new MainApp(uID);
         mapsFragment = new MapsFragment();
         mapsFragment.setApp(app);
         friendsFragment = new FriendsFragment();
@@ -198,9 +180,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void startTrackingService(){
-        startService(new Intent(this, TrackingService.class));
 
-        Toast.makeText(this, "GPS tracking enabled", Toast.LENGTH_SHORT).show();
-    }
 }

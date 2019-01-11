@@ -1,4 +1,4 @@
-package com.lost.lost;
+package com.lost.lost.javaRes.account;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lost.lost.R;
 
 public class PasswordActivity extends AppCompatActivity implements View.OnClickListener {
 

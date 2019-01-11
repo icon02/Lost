@@ -1,4 +1,4 @@
-package com.lost.lost;
+package com.lost.lost.javaRes.services;
 
 import android.Manifest;
 import android.app.Notification;
@@ -22,24 +22,34 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lost.lost.R;
 
 public class TrackingService extends Service {
 
     private static final String TAG = TrackingService.class.getSimpleName();
 
-    private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
+    private String uID;
+
+    private boolean isCreating;
+
+    public TrackingService() {
+    }
 
     @Override
     public IBinder onBind(Intent intent){
         return null;
     }
 
+
     @Override
     public void onCreate(){
+        isCreating = true;
         super.onCreate();
        // createNotification();
+        createDatabaseReference();
         requestLocationUpdates();
+        isCreating = false;
     }
 
     //creating persistent notification
@@ -66,6 +76,15 @@ public class TrackingService extends Service {
         }
     };
 
+    public boolean isCreating() {
+        return isCreating;
+    }
+
+    private void createDatabaseReference(){
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        uID = currentUser.getUid();
+    }
+
     private void requestLocationUpdates(){
         LocationRequest request = new LocationRequest();
         request.setInterval(10000);
@@ -81,7 +100,7 @@ public class TrackingService extends Service {
                 public void onLocationResult(LocationResult locationResult){
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference(path);
                     Location location = locationResult.getLastLocation();
-                    if (location != null) ref.setValue(location);
+                    if (location != null) ref.child(uID).setValue(location);
                 }
             }, null);
         }

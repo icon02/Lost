@@ -1,12 +1,9 @@
-package com.lost.lost;
+package com.lost.lost.javaRes.account;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -22,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lost.lost.R;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -74,7 +72,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
      FirebaseUser currentUser = mAuth.getCurrentUser();
      }
      */
-    private void createAccount(String email, String password){
+    private void createAccount(final String email, String password){
         Log.d(TAG, "createAccount:"+email);
         if(!validForm()) return;
 
@@ -86,15 +84,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(CreateAccountActivity.this, "Please confirm email and then log in!", Toast.LENGTH_SHORT).show();
-
-                            /**
-                             //sleep to show TOAST
-                             try{
-                             TimeUnit.SECONDS.sleep(10);
-                             } catch (InterruptedException e){
-                             return;
-                             }
-                             **/
 
                             createdAccount();
                         } else {

@@ -1,4 +1,4 @@
-package com.lost.lost;
+package com.lost.lost.javaRes.account;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lost.lost.R;
+import com.lost.lost.javaRes.services.SplashActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
@@ -81,8 +83,8 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void logedIn(){
-        Intent logIn = new Intent(this, MainActivity.class);
-        startActivity(logIn);
+        Intent splash = new Intent(this, SplashActivity.class);
+        startActivity(splash);
     }
 
     private boolean validForm(){

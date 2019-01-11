@@ -8,13 +8,19 @@ import java.util.ArrayList;
 public class Friend {
 
     private String name;
-    private ArrayList<LatLng> pos;
+   // private ArrayList<LatLng> pos;
     private String userID;
+    private LatLng pos;
 
 
     public Friend(String userID, String name) {
         this.name = name;
         this.userID = userID;
+    }
+
+    public Friend(String name, LatLng pos){
+        this.name = name;
+        this.pos = pos;
     }
 
     public String getName() {
@@ -25,7 +31,7 @@ public class Friend {
         return userID;
     }
 
-    public LatLng getCurrentPosition() {
-        return pos.get(pos.size() -1);
-    }
+    //public LatLng getCurrentPosition() {
+      //  return pos.get(pos.size() -1);
+    //}
 }
