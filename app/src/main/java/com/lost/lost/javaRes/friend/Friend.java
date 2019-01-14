@@ -1,8 +1,6 @@
-package com.lost.lost.friend;
+package com.lost.lost.javaRes.friend;
 
 import com.google.android.gms.maps.model.LatLng;
-
-import java.util.ArrayList;
 
 
 public class Friend {
@@ -11,9 +9,11 @@ public class Friend {
    // private ArrayList<LatLng> pos;
     private String userID;
     private LatLng pos;
+    private boolean enabled;
 
 
     public Friend(String userID, String name) {
+        this.enabled = true;
         this.name = name;
         this.userID = userID;
     }
@@ -31,7 +31,9 @@ public class Friend {
         return userID;
     }
 
-    //public LatLng getCurrentPosition() {
-      //  return pos.get(pos.size() -1);
-    //}
+    public LatLng getLastPosition() {
+        return pos;
+    }
+    public boolean isEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 }

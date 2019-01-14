@@ -1,19 +1,24 @@
 package com.lost.lost.fragments;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,10 +28,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lost.lost.R;
 
+import java.util.ArrayList;
+
 
 public class MapsFragment extends FragmentPassObject implements OnMapReadyCallback {
 
     GoogleMap map;
+    ArrayList<MarkerOptions> marker;
 
     private String uID = FirebaseAuth.getInstance().getUid();
 
@@ -51,12 +59,27 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
-        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         // Add a marker in Sydney and move the camera
         LatLng mySelf = getPosition();
-        map.addMarker(new MarkerOptions().position(mySelf).title("My Position"));
+
+        if(ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+           //GPS permission granted
+            map.setMyLocationEnabled(true);
+        } else {
+            //GPS permission denied
+
+        }
+
+        /*map.addMarker(new MarkerOptions().position(mySelf).title("My Position"));
         map.moveCamera(CameraUpdateFactory.newLatLng(mySelf));
+        try {
+            //Thread.sleep(3000);
+        } catch(Exception e) {}
+*/
+        map.animateCamera(CameraUpdateFactory.zoomTo(16f));
+
     }
 
     private LatLng getPosition(){
@@ -93,4 +116,23 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
         return latLng;
     }
 
+    public synchronized void addMarker(LatLng pos, String name) {
+        MarkerOptions m = new MarkerOptions().position(pos).title(name);
+        marker.add(m);
+
+    }
+
+    public synchronized void removeMarker(String name) {
+        for(MarkerOptions m : marker) {
+            if(m.getTitle().equals(name)) marker.remove(m);
+        }
+
+
+    }
+
+    public void refreshMarkers() {
+        for(MarkerOptions m : marker) {
+            map.addMarker(m);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.lost.lost.friend;
+package com.lost.lost.javaRes.friend;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

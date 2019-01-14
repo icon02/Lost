@@ -24,7 +24,12 @@ import com.lost.lost.fragments.SettingsFragment;
 import com.lost.lost.javaRes.account.LogInActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final int REFRESH_RATE = 2000; //2 sec
 
     private MainApp app;
     private FragmentManager fragmentManager;
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     private String uID;
 
+    private Timer timer;
+    private TimerTask refreshTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         uID = currentUser.getUid();
 
-
-
         /*
         persProfile = findViewById(R.id.persProfile_Button);
         persProfile.setOnClickListener(new View.OnClickListener() {
@@ -80,12 +85,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
         */
         fragmentManager.beginTransaction().replace(R.id.fragment_container, mapsFragment).commit();
+        /*
+        timer = new Timer();
+        refreshTasks = new TimerTask() {
+            @Override
+            public void run() {
+                //TODO add all sync-Tasks
+
+            }
+        };
+        timer.schedule(refreshTasks, REFRESH_RATE);
+        */
     }
 
 
 
     private void init() {
-        app = new MainApp(uID);
+        app = new MainApp(uID, this);
         mapsFragment = new MapsFragment();
         mapsFragment.setApp(app);
         friendsFragment = new FriendsFragment();
@@ -100,6 +116,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         settingsFragment.setApp(app);
 
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        System.gc();
+        //TODO disable AccessPoint and reset/write old AccessPoint-Settings
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        //TODO disable AccessPoint and reset/write old AccessPoint-Settings
     }
 
     @Override
@@ -128,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            fragmentManager.beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
             return true;
         } else if(id == R.id.addFriend_MenuItem) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container, addFriendFragment).commit();
@@ -172,5 +203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
+    public MapsFragment mapsFragment() { return mapsFragment; }
 }
+
+

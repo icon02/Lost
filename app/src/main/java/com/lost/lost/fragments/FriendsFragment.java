@@ -1,9 +1,6 @@
 package com.lost.lost.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +8,8 @@ import android.widget.ListView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.lost.lost.R;
-import com.lost.lost.friend.Friend;
-import com.lost.lost.friend.FriendListAdapter;
+import com.lost.lost.javaRes.friend.Friend;
+import com.lost.lost.javaRes.friend.FriendListAdapter;
 
 import java.util.ArrayList;
 
