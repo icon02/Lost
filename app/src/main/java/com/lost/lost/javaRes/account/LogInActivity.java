@@ -67,7 +67,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        final boolean emailVerified = mAuth.getCurrentUser().isEmailVerified();
+                        //final boolean emailVerified = mAuth.getCurrentUser().isEmailVerified();
                         //TODO: add "&& emailVerified" in if!
                         if (task.isSuccessful()){
                             Log.d(TAG, "signInWithEmail:success");

@@ -16,9 +16,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +40,8 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final int PERMISSION_REQUEST = 100;
 
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +55,11 @@ public class SplashActivity extends AppCompatActivity {
         logo.startAnimation(myanim);
 
         textView = findViewById(R.id.splashScreenText);
+
+
+        //starting progressbar
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         //check if there is a internet-connection
         if (checkNetworkStat()){
@@ -83,6 +92,7 @@ public class SplashActivity extends AppCompatActivity {
 
                 }
                 */
+
                 Intent i = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(i);
                 finish();
