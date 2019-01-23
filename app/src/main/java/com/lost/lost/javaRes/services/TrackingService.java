@@ -100,7 +100,7 @@ public class TrackingService extends Service {
                 public void onLocationResult(LocationResult locationResult){
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference(path);
                     Location location = locationResult.getLastLocation();
-                    if (location != null) ref.child(uID).setValue(location);
+                    if (location != null) ref.child(uID).child("Location").setValue(location);
                 }
             }, null);
         }

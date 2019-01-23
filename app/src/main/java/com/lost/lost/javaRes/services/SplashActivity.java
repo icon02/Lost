@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -25,8 +26,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lost.lost.MainActivity;
 import com.lost.lost.R;
 
@@ -42,6 +46,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
 
+    private DatabaseReference myDatabase = FirebaseDatabase.getInstance().getReference();
+
+    private String uid = FirebaseAuth.getInstance().getUid();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +81,8 @@ public class SplashActivity extends AppCompatActivity {
         if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             showGPSDisabledAlert();
         }
+
+        databaseRef(uid);
 
         //check if the app has access to the location permission
         int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -163,4 +172,19 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    private void databaseRef(final String uid){
+        myDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               if(!dataSnapshot.hasChild(uid)) {
+                   myDatabase.child(uid);
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

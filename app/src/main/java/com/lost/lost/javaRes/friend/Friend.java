@@ -18,10 +18,7 @@ public class Friend {
         this.userID = userID;
     }
 
-    public Friend(String name, LatLng pos){
-        this.name = name;
-        this.pos = pos;
-    }
+    public Friend(){    }
 
     public String getName() {
         return name;

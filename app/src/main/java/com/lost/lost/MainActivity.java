@@ -15,6 +15,8 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lost.lost.fragments.AddFriendFragment;
 import com.lost.lost.fragments.EmergencyFragment;
 import com.lost.lost.fragments.FriendsFragment;
@@ -50,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     private String uID;
 
-    private Timer timer;
-    private TimerTask refreshTasks;
+    private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(uID);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentManager = getSupportFragmentManager();
 
         super.onCreate(savedInstanceState);
+
+        //set persistence
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        ref.keepSynced(true);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

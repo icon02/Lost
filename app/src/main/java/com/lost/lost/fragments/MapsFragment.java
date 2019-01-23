@@ -39,7 +39,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
     private String uID = FirebaseAuth.getInstance().getUid();
 
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Users/");
-    private DatabaseReference myRef = database.child(uID);
+    private DatabaseReference myRef = database.child(uID).child("Location/");
 
     private double lat;
     private double lng;
