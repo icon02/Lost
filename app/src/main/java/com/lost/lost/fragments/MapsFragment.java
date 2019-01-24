@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lost.lost.R;
+import com.lost.lost.javaRes.friend.Friend;
 
 import java.util.ArrayList;
 
@@ -41,10 +42,13 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference().child("Users/");
     private DatabaseReference myRef = database.child(uID).child("Location/");
 
-    private double lat;
-    private double lng;
+    private double lat, lng;
 
+    private FriendsFragment ff = new FriendsFragment();
 
+    private String friendID, friendName;
+
+    private double fLat, fLng;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +82,16 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             //Thread.sleep(3000);
         } catch(Exception e) {}
 */
+
+        for(Friend f : ff.getFriendsList()){
+
+            if (f.isEnabled()) {
+                friendID = f.getUserID();
+                friendName = f.getName();
+            }
+            map.addMarker(new MarkerOptions().position(getFriendsPosition(friendID)).title(friendName));
+        }
+
         map.animateCamera(CameraUpdateFactory.zoomTo(16f));
 
     }
@@ -88,7 +102,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
-                    lat = dataSnapshot.getValue(Double.class);
+                    fLat = dataSnapshot.getValue(Double.class);
                 }
             }
 
@@ -102,7 +116,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
-                    lng = dataSnapshot.getValue(Double.class);
+                    fLng = dataSnapshot.getValue(Double.class);
                 }
             }
 
@@ -112,8 +126,43 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             }
         });
 
-        LatLng latLng = new LatLng(lat, lng);
+        LatLng latLng = new LatLng(fLat, fLng);
         return latLng;
+    }
+
+    private LatLng getFriendsPosition(String id){
+       DatabaseReference friendsRef = database.child(id).child("Location/");
+
+       friendsRef.child("latitude").addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               if (dataSnapshot != null){
+                   lat = dataSnapshot.getValue(Double.class);
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
+
+       friendsRef.child("longitude").addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               if (dataSnapshot != null){
+                   lng = dataSnapshot.getValue(Double.class);
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
+
+       LatLng latLng = new LatLng(lat, lng);
+       return latLng;
     }
 
     public synchronized void addMarker(LatLng pos, String name) {
