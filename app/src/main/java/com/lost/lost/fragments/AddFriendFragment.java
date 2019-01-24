@@ -1,26 +1,38 @@
 package com.lost.lost.fragments;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.TextInputEditText;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dm.zbar.android.scanner.ZBarConstants;
 import com.dm.zbar.android.scanner.ZBarScannerActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.lost.lost.R;
+import com.lost.lost.javaRes.friend.Friend;
 
 import net.sourceforge.zbar.Symbol;
 
@@ -31,6 +43,7 @@ import java.util.Collection;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static android.support.v4.content.ContextCompat.checkSelfPermission;
 import static com.google.zxing.integration.android.IntentIntegrator.QR_CODE_TYPES;
 
 
@@ -41,11 +54,20 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
 
     private TextView idText;
 
-    private TextInputEditText nameText;
+    private EditText nameText;
 
 
     private static final int ZBAR_SCANNER_REQUEST = 0;
     private static final int ZBAR_QR_SCANNER_REQUEST = 1;
+    private static final int PERMISSION_REQUEST = 100;
+
+    private String friendsName;
+    private String friendsID;
+
+    private String uid = FirebaseAuth.getInstance().getUid();
+
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference myRef = mDatabase.child("Users/").child(uid).child("Friends");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,15 +75,21 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_add_friend, container, false);
 
-        //init();
-        scanButton = v.findViewById(R.id.scan_button);
-        addButton = v.findViewById(R.id.button2);
-        scanButton.setOnClickListener(this);
-        addButton.setOnClickListener(this);
+        init(v);
 
-        idText = v.findViewById(R.id.textView6);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(this.getActivity(),Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] {Manifest.permission.CAMERA}, 1);
+            }
+        }
 
+        int permission = checkSelfPermission(this.getActivity(), Manifest.permission.CAMERA);
 
+        if (permission == PackageManager.PERMISSION_GRANTED){
+
+        } else {
+            ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST);
+        }
 
         return v;
     }
@@ -76,6 +104,8 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
             launchScanner(v);
         } else if (id == R.id.button2){
             // get string from scanner and textField and put in friendslist
+            addNewFriend(friendsID, nameText.getText().toString());
+            Toast.makeText(this.getActivity(), "Added Friend" + nameText.getText().toString(), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -87,8 +117,9 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
             case ZBAR_SCANNER_REQUEST:
             case ZBAR_QR_SCANNER_REQUEST:
                 if (resultCode == RESULT_OK){
-                    Toast.makeText(this.getActivity(), "Scan Result = " + data.getStringExtra(ZBarConstants.SCAN_RESULT), Toast.LENGTH_SHORT).show();
-                    updateText(data.getStringExtra(ZBarConstants.SCAN_RESULT));
+                    friendsID = data.getStringExtra(ZBarConstants.SCAN_RESULT);
+                    Toast.makeText(this.getActivity(), "Scan Result = " +friendsID, Toast.LENGTH_SHORT).show();
+                    updateText(friendsID);
                 } else if(resultCode == RESULT_CANCELED && data != null){
                     String error = data.getStringExtra(ZBarConstants.ERROR_INFO);
                     if (!TextUtils.isEmpty(error)){
@@ -97,6 +128,15 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
                 }
                 break;
         }
+    }
+
+    private void init(View v){
+        scanButton = v.findViewById(R.id.scan_button);
+        addButton = v.findViewById(R.id.button2);
+        scanButton.setOnClickListener(this);
+        addButton.setOnClickListener(this);
+        nameText = v.findViewById(R.id.editText);
+        idText = v.findViewById(R.id.textView6);
     }
 
     private void launchScanner(View v){
@@ -115,9 +155,15 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
 
     private boolean isCameraAvailable(){
         PackageManager pm = this.getActivity().getPackageManager();
+
         return pm.hasSystemFeature(PackageManager.FEATURE_CAMERA);
     }
 
+    private void addNewFriend(String id, String name){
+        Friend friend = new Friend(id, name);
+
+        myRef.child(name).setValue(friend);
+    }
 
 
 
