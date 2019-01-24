@@ -13,6 +13,7 @@ import com.lost.lost.MainActivity;
 import com.lost.lost.javaRes.friend.Friend;
 
 
+import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,6 +58,7 @@ public class MainApp {
         wifiManager = (WifiManager)mainActivity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiCofnig = new WifiConfiguration();
         emergencyMode = new Emergency(wifiManager);
+
 
         refreshTasks = new TimerTask() {
             @Override
@@ -160,5 +162,22 @@ public class MainApp {
     }
 
 
+
+    /************************************************************/
+    /*********************private classes************************/
+    /************************************************************/
+
+
+
+    public void enableAp() {
+        if(!WifiAp.isApOn(mainActivity.getApplicationContext())) {
+            WifiAp.configApState(mainActivity.getApplicationContext());
+        }
+    }
+    public void disableAp() {
+        if(WifiAp.isApOn(mainActivity.getApplicationContext())) {
+            WifiAp.configApState(mainActivity.getApplicationContext());
+        }
+    }
 
 }

@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.lost.lost.R;
 
 public class TrackingService extends Service {
+    private static final int UPDATE_INTERVAL = 5000;
 
     private static final String TAG = TrackingService.class.getSimpleName();
 
@@ -87,7 +88,7 @@ public class TrackingService extends Service {
 
     private void requestLocationUpdates(){
         LocationRequest request = new LocationRequest();
-        request.setInterval(10000);
+        request.setInterval(UPDATE_INTERVAL);
 
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         FusedLocationProviderClient client = LocationServices.getFusedLocationProviderClient(this);

@@ -65,9 +65,9 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in Sydney and move the camera TODO
         LatLng mySelf = getPosition();
-
+        /*
         if(ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
            //GPS permission granted
             map.setMyLocationEnabled(true);
@@ -75,7 +75,9 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             //GPS permission denied
 
         }
-
+        */
+        map.setMyLocationEnabled(true);
+        map.addMarker(new MarkerOptions().position(mySelf).title("my pos"));
         /*map.addMarker(new MarkerOptions().position(mySelf).title("My Position"));
         map.moveCamera(CameraUpdateFactory.newLatLng(mySelf));
         try {
