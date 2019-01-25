@@ -38,7 +38,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(com.lost.lost.R.layout.activity_log_in);
 
-        //FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         
         //fields
         mEmailField = findViewById(com.lost.lost.R.id.auth_email);

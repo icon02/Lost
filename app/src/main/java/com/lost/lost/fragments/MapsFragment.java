@@ -67,7 +67,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 
         // Add a marker in Sydney and move the camera TODO
         LatLng mySelf = getPosition();
-        /*
+        
         if(ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
            //GPS permission granted
             map.setMyLocationEnabled(true);
@@ -75,9 +75,9 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             //GPS permission denied
 
         }
-        */
-        map.setMyLocationEnabled(true);
-        map.addMarker(new MarkerOptions().position(mySelf).title("my pos"));
+
+        //map.setMyLocationEnabled(true);
+        //map.addMarker(new MarkerOptions().position(mySelf).title("my pos"));
         /*map.addMarker(new MarkerOptions().position(mySelf).title("My Position"));
         map.moveCamera(CameraUpdateFactory.newLatLng(mySelf));
         try {
@@ -86,11 +86,13 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 */
 
         for(Friend f : ff.getFriendsList()){
-
+            /*
             if (f.isEnabled()) {
                 friendID = f.getUserID();
                 friendName = f.getName();
-            }
+            }*/
+            friendID = f.getUserID();
+            friendName = f.getName();
             map.addMarker(new MarkerOptions().position(getFriendsPosition(friendID)).title(friendName));
         }
 
@@ -167,11 +169,12 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
        return latLng;
     }
 
+    /*
     public synchronized void addMarker(LatLng pos, String name) {
         MarkerOptions m = new MarkerOptions().position(pos).title(name);
         marker.add(m);
 
-    }
+    } */
 
     public synchronized void removeMarker(String name) {
         for(MarkerOptions m : marker) {

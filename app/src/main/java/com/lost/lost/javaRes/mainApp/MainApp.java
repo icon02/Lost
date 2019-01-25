@@ -144,13 +144,16 @@ public class MainApp {
     /**************************************************************/
 
 
+
     public synchronized void syncMapsMarkers() {
         //TODO
+        /*
         for(Friend f : friends) {
             mainActivity.mapsFragment().removeMarker(f.getName());
             mainActivity.mapsFragment().addMarker(f.getLastPosition(), f.getName());
         }
         mainActivity.mapsFragment().refreshMarkers();
+        */
     }
 
     private static void loadAppWifiHotspotConfiguration() {

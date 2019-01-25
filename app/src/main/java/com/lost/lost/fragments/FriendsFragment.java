@@ -37,6 +37,8 @@ public class FriendsFragment extends FragmentPassObject {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference myRef = mDatabase.child("Users/").child(uid).child("Friends/");
 
+    private ArrayList<Friend> friendlist;
+
     private boolean checked;
 
     @Override
@@ -73,8 +75,8 @@ public class FriendsFragment extends FragmentPassObject {
         final ArrayList<Friend> output = new ArrayList<>();
 
         //testing
-        output.add(new Friend("a73pkdrfy8X2KIQJRRNWrplk9ox1", "AlexTest"));
-        //output.add(new Friend("1IP8AjnmFJb6lGeO9sXwiyJNPEk1", "Test"));
+        //output.add(new Friend("a73pkdrfy8X2KIQJRRNWrplk9ox1", "AlexTest"));
+        output.add(new Friend("1IP8AjnmFJb6lGeO9sXwiyJNPEk1", "Test"));
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

@@ -59,11 +59,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
 
-        /*
+
         //set persistence
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        ref.keepSynced(true);
-        */
+        //ref.keepSynced(true);
+
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
