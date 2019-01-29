@@ -12,11 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Switch;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -28,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lost.lost.R;
 import com.lost.lost.javaRes.friend.Friend;
+import com.lost.lost.javaRes.friend.ViewHolder;
 
 import java.util.ArrayList;
 
@@ -50,14 +56,50 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 
     private double fLat, fLng;
 
+    private FirebaseRecyclerAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_maps, container, false);
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map1);
         mapFragment.getMapAsync(this);
+        myRef.keepSynced(true);
+
+        FirebaseRecyclerOptions<Friend> options = new FirebaseRecyclerOptions.Builder<Friend>()
+                .setQuery(myRef, Friend.class)
+                .build();
+
+        adapter = new FirebaseRecyclerAdapter<Friend, ViewHolder>(options) {
+            @NonNull
+            @Override
+            public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friends, viewGroup, false);
+
+                return new ViewHolder(v);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Friend model) {
+                Switch aSwitch = holder.getaSwitch();
+
+                ff.addFriend(model);
+            }
+        };
 
         return v;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        adapter.stopListening();
     }
 
     @Override
@@ -84,19 +126,20 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             //Thread.sleep(3000);
         } catch(Exception e) {}
 */
-
         for(Friend f : ff.getFriendsList()){
-            /*
-            if (f.isEnabled()) {
-                friendID = f.getUserID();
-                friendName = f.getName();
-            }*/
-            friendID = f.getUserID();
             friendName = f.getName();
-            map.addMarker(new MarkerOptions().position(getFriendsPosition(friendID)).title(friendName));
+            friendID = f.getUserID();
+
+            if (f.isEnabled()){
+                map.addMarker(new MarkerOptions()
+                        .position(getFriendsPosition(friendID))
+                        .title(friendName)
+                        .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+            }
         }
 
-        map.animateCamera(CameraUpdateFactory.zoomTo(16f));
+        //map.animateCamera(CameraUpdateFactory.zoomTo(16f));
 
     }
 
@@ -189,4 +232,5 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             map.addMarker(m);
         }
     }
+
 }
