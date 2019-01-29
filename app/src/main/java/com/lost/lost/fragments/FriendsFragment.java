@@ -71,11 +71,10 @@ public class FriendsFragment extends FragmentPassObject {
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Friend model) {
                 friendlist.add(model);
+                holder.setNameText(model.getName());
                 aSwitch = holder.getaSwitch();
 
                 for (Friend f : friendlist) {
-
-                    holder.setNameText(f.getName());
 
                     aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
