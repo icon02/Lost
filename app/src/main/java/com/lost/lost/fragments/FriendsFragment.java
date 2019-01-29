@@ -2,17 +2,17 @@ package com.lost.lost.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.ListView;
 import android.widget.Switch;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,15 +20,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lost.lost.R;
 import com.lost.lost.javaRes.friend.Friend;
-import com.lost.lost.javaRes.friend.FriendListAdapter;
+import com.lost.lost.javaRes.friend.ViewHolder;
 
 import java.util.ArrayList;
 
 
 public class FriendsFragment extends FragmentPassObject {
 
-    private ListView friendsList;
-    private FriendListAdapter friendListAdapter;
+
+    private RecyclerView recyclerView;
+
+    private RecyclerView.LayoutManager layoutManager;
 
     private String uid = FirebaseAuth.getInstance().getUid();
 
@@ -37,7 +39,9 @@ public class FriendsFragment extends FragmentPassObject {
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference myRef = mDatabase.child("Users/").child(uid).child("Friends/");
 
-    private ArrayList<Friend> friendlist;
+    private FirebaseRecyclerAdapter adapter;
+
+    private ArrayList<Friend> friendlist = new ArrayList<>();
 
     private boolean checked;
 
@@ -45,57 +49,74 @@ public class FriendsFragment extends FragmentPassObject {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_friends, container, false);
-        friendsList = v.findViewById(R.id.friends_ListView);
-        friendListAdapter = new FriendListAdapter(getActivity(), getFriendsList());
-        friendsList.setAdapter(friendListAdapter);
+        recyclerView = v.findViewById(R.id.my_recycler_view);
+        myRef.keepSynced(true);
 
-        aSwitch = v.findViewById(R.id.switch1);
+        layoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(layoutManager);
 
-        /*
-        //TODO: Nullpointer on switch
-        for (Friend f : getFriendsList()) {
-            aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked){
-                       checked = true;
-                    } else {
-                        checked = false;
-                    }
+        FirebaseRecyclerOptions<Friend> options = new FirebaseRecyclerOptions.Builder<Friend>()
+                .setQuery(myRef, Friend.class)
+                .build();
+
+        adapter = new FirebaseRecyclerAdapter<Friend, ViewHolder>(options) {
+            @NonNull
+            @Override
+            public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+               View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_friends, viewGroup, false);
+
+               return new ViewHolder(v);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Friend model) {
+                holder.setNameText(model.getName());
+                aSwitch = holder.getaSwitch();
+
+                friendlist.add(model);
+
+                for (Friend f : friendlist) {
+                    aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if(isChecked){
+                                checked = true;
+                            } else {
+                                checked = false;
+                            }
+                        }
+                    });
+                    f.setEnabled(checked);
                 }
-            });
-            f.setEnabled(checked);
-        }
-        */
+
+            }
+        };
+
+        recyclerView.setAdapter(adapter);
+
 
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    public void addFriend(Friend friend){
+        friendlist.add(friend);
+    }
+
+
     public ArrayList<Friend> getFriendsList() {
-        final ArrayList<Friend> output = new ArrayList<>();
-
-        //testing
-        //output.add(new Friend("a73pkdrfy8X2KIQJRRNWrplk9ox1", "AlexTest"));
-        output.add(new Friend("1IP8AjnmFJb6lGeO9sXwiyJNPEk1", "Test"));
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //TODO: iterate over all friends in child "Friend" and add each one to output
-                for (DataSnapshot snapshot : dataSnapshot.getChildren() ) {
-                    Friend friend = snapshot.getValue(Friend.class);
-                    output.add(new Friend(friend.getUserID(), friend.getName()));
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        return output;
+        return friendlist;
     }
 
 }

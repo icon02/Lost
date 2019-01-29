@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.lost.lost.R;
 
 public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,6 +32,9 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     private CheckBox mCheckBox;
 
     private FirebaseAuth mAuth;
+
+
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Users/");
 
 
     @Override
@@ -84,7 +89,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(CreateAccountActivity.this, "Please confirm email and then log in!", Toast.LENGTH_SHORT).show();
-
+                            //createDbRef(user.getUid());
                             createdAccount();
                         } else {
                             Log.w(TAG, "createWithEmail:failure", task.getException());
@@ -138,4 +143,15 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
         }
     }
+
+    /*
+    private void createDbRef(String id){
+        DatabaseReference myRef = mDatabase.child(id);
+
+        myRef.child("Friends").setValue("ref");
+        myRef.child("Location").child("latitude").setValue("48.278854");
+        myRef.child("Location").child("longitude").setValue("14.31058");
+    }
+    */
+    
 }

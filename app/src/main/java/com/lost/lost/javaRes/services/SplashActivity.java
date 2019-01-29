@@ -17,7 +17,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -25,6 +27,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +37,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lost.lost.MainActivity;
 import com.lost.lost.R;
+import com.lost.lost.fragments.FriendsFragment;
+import com.lost.lost.javaRes.friend.Friend;
+import com.lost.lost.javaRes.friend.ViewHolder;
 
 import java.util.Timer;
 
@@ -93,6 +100,7 @@ public class SplashActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST);
         }
 
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -108,16 +116,8 @@ public class SplashActivity extends AppCompatActivity {
             }
         },splashTimeOut);
 
-        /*
-        while(ts.isCreating()){
-
-        }
-        Intent i = new Intent(SplashActivity.this, MainActivity.class);
-        startActivity(i);
-        finish();
-        */
-
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]
@@ -187,4 +187,5 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
     }
+
 }
