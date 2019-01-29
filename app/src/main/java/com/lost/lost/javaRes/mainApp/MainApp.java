@@ -35,8 +35,6 @@ public class MainApp {
     private TimerTask refreshTasks;
     private MainActivity mainActivity;
 
-    private DatabaseReference database;
-    private DatabaseReference databaseMyData;
 
     private HashSet<Friend> friends;
 
@@ -165,22 +163,5 @@ public class MainApp {
     }
 
 
-
-    /************************************************************/
-    /*********************private classes************************/
-    /************************************************************/
-
-
-
-    public void enableAp() {
-        if(!WifiAp.isApOn(mainActivity.getApplicationContext())) {
-            WifiAp.configApState(mainActivity.getApplicationContext());
-        }
-    }
-    public void disableAp() {
-        if(WifiAp.isApOn(mainActivity.getApplicationContext())) {
-            WifiAp.configApState(mainActivity.getApplicationContext());
-        }
-    }
 
 }

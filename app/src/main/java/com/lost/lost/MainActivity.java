@@ -1,5 +1,6 @@
 package com.lost.lost;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -15,10 +16,7 @@ import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.lost.lost.fragments.AddFriendFragment;
-import com.lost.lost.fragments.EmergencyFragment;
 import com.lost.lost.fragments.FriendsFragment;
 import com.lost.lost.fragments.MapsFragment;
 import com.lost.lost.fragments.PersProfileFragment;
@@ -26,26 +24,24 @@ import com.lost.lost.fragments.SettingsFragment;
 import com.lost.lost.javaRes.account.LogInActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int REFRESH_RATE = 2000; //2 sec
 
-    private MainApp app;
-    private FragmentManager fragmentManager;
-    private EmergencyFragment emergencyFragment;
-    private AddFriendFragment addFriendFragment;
-    private PersProfileFragment persProfileFragment;
-    private SettingsFragment settingsFragment;
+    public MainApp app;
+    public FragmentManager fragmentManager;
+    public static EmergencyFragment emergencyFragment;
+    public static DeviceListFragment deviceListFragment;
+    public static AddFriendFragment addFriendFragment;
+    public static PersProfileFragment persProfileFragment;
+    public static SettingsFragment settingsFragment;
 
     private ImageView persProfile;
 
     private MenuItem addFriend_MenuItem;
 
-    private MapsFragment mapsFragment;
-    private FriendsFragment friendsFragment;
+    public MapsFragment mapsFragment;
+    public FriendsFragment friendsFragment;
 
     private FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
     private String uID;
@@ -111,8 +107,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mapsFragment.setApp(app);
         friendsFragment = new FriendsFragment();
         friendsFragment.setApp(app);
-        emergencyFragment = new EmergencyFragment();
-        emergencyFragment.setApp(app);
         addFriendFragment = new AddFriendFragment();
         addFriendFragment.setApp(app);
         persProfileFragment = new PersProfileFragment();
@@ -190,7 +184,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_friends) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container, friendsFragment).commit();
         } else if (id == R.id.nav_emergency) {
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, emergencyFragment).commit();
+            //TODO enter Emergency Activity
+            //fragmentManager.beginTransaction().replace(R.id.fragment_container, deviceListFragment).commit();
         } else if (id == R.id.nav_manage) {
             fragmentManager.beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
         } else if (id == R.id.nav_aboutUs) {
