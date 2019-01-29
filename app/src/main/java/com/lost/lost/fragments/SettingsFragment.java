@@ -24,6 +24,7 @@ public class SettingsFragment extends FragmentPassObject {
         ap_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*
                 if(ap_btn.getText().equals("OFF")) {
                     app.enableAp();
                     ap_btn.setText("ON");
@@ -31,6 +32,7 @@ public class SettingsFragment extends FragmentPassObject {
                     app.disableAp();
                     ap_btn.setText("OFF");
                 }
+                */
             }
         });
 

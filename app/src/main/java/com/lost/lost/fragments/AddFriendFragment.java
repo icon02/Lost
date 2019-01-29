@@ -15,6 +15,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,7 +80,15 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(this.getActivity(),Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[] {Manifest.permission.CAMERA}, 1);
+                for(int i = 0; i < 200; i++) {
+                    try {
+                        Log.d("AddFriendFragment", "Try to acces cammera. Request code: " + i);
+                    } catch(Exception e) {
+                        Log.e("AddFriendFragment", "Error with RequestCode: " + i);
+                    }
+                }
+
+                requestPermissions(new String[] {Manifest.permission.CAMERA}, 50);
             }
         }
 
