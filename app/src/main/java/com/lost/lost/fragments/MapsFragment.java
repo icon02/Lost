@@ -20,6 +20,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -81,11 +83,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Friend model) {
                 Switch aSwitch = holder.getaSwitch();
 
-                friendID = model.getUserID();
-                friendName = model.getName();
-                //if(model.isEnabled()) {
-                    map.addMarker(new MarkerOptions().position(getFriendsPosition(friendID)).title(friendName));
-                //}
+                ff.addFriend(model);
             }
         };
 
@@ -128,7 +126,18 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             //Thread.sleep(3000);
         } catch(Exception e) {}
 */
+        for(Friend f : ff.getFriendsList()){
+            friendName = f.getName();
+            friendID = f.getUserID();
 
+            if (f.isEnabled()){
+                map.addMarker(new MarkerOptions()
+                        .position(getFriendsPosition(friendID))
+                        .title(friendName)
+                        .icon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+            }
+        }
 
         //map.animateCamera(CameraUpdateFactory.zoomTo(16f));
 

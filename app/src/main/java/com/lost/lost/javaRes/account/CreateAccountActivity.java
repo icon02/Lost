@@ -89,7 +89,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(CreateAccountActivity.this, "Please confirm email and then log in!", Toast.LENGTH_SHORT).show();
-                            //createDbRef(user.getUid());
+                            createDbRef(user.getUid());
                             createdAccount();
                         } else {
                             Log.w(TAG, "createWithEmail:failure", task.getException());
@@ -144,7 +144,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    /*
+
     private void createDbRef(String id){
         DatabaseReference myRef = mDatabase.child(id);
 
@@ -152,6 +152,6 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         myRef.child("Location").child("latitude").setValue("48.278854");
         myRef.child("Location").child("longitude").setValue("14.31058");
     }
-    */
+
     
 }
