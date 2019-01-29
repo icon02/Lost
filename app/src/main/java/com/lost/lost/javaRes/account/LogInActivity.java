@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.lost.lost.MainActivity;
+import com.lost.lost.R;
 import com.lost.lost.javaRes.services.SplashActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
 
@@ -27,6 +30,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEmailField;
     private EditText mPasswordField;
     private TextView mTextView;
+    private CheckBox remember;
 
     private FirebaseAuth mAuth;
 
@@ -38,8 +42,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(com.lost.lost.R.layout.activity_log_in);
 
-       // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        
+
         //fields
         mEmailField = findViewById(com.lost.lost.R.id.auth_email);
         mPasswordField = findViewById(com.lost.lost.R.id.auth_password);
@@ -48,9 +51,21 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         findViewById(com.lost.lost.R.id.auth_create_button).setOnClickListener(this);
         findViewById(com.lost.lost.R.id.auth_logIn_button).setOnClickListener(this);
         findViewById(com.lost.lost.R.id.auth_password_reset).setOnClickListener(this);
+        findViewById(R.id.checkBox);
 
         //init auth
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            Intent i = new Intent(LogInActivity.this, MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(i);
+        } else {
+            // User is signed out
+            Log.d(TAG, "onAuthStateChanged:signed_out");
+        }
     }
 
     @Override
