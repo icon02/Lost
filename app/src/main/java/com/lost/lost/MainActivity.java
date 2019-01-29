@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public MainApp app;
     public FragmentManager fragmentManager;
-    public static EmergencyFragment emergencyFragment;
-    public static DeviceListFragment deviceListFragment;
     public static AddFriendFragment addFriendFragment;
     public static PersProfileFragment persProfileFragment;
     public static SettingsFragment settingsFragment;
@@ -180,19 +178,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (id == R.id.nav_maps) {
             //TODO change nav_header_Title to fragment title
+            setTitle("Maps");
             fragmentManager.beginTransaction().replace(R.id.fragment_container, mapsFragment).commit();
         } else if (id == R.id.nav_friends) {
+            setTitle("Friends");
             fragmentManager.beginTransaction().replace(R.id.fragment_container, friendsFragment).commit();
         } else if (id == R.id.nav_emergency) {
             //TODO enter Emergency Activity
+            Intent emergency = new Intent(this, EmergencyActivity.class);
+            startActivity(emergency);
             //fragmentManager.beginTransaction().replace(R.id.fragment_container, deviceListFragment).commit();
         } else if (id == R.id.nav_manage) {
+            setTitle("Settings");
             fragmentManager.beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
         } else if (id == R.id.nav_aboutUs) {
 
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_personal){
+            setTitle("Profile");
             fragmentManager.beginTransaction().replace(R.id.fragment_container, persProfileFragment).commit();
         }
 
