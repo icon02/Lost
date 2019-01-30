@@ -61,6 +61,8 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 
     private long fLat, fLng;
 
+    private LatLng pos;
+
     private static final String TAG = "friends";
 
 
@@ -135,14 +137,19 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
                 while (iterator.hasNext()){
                     DataSnapshot next = iterator.next();
                     Log.i(TAG, "Friend = " + next.getValue());
-                    list.add(next.getValue(Friend.class));
-                    for (Friend f : list){
-                        String name = f.getName();
-                        String uid = f.getUserID();
-                        f.setPos(getFriendsPosition(uid));
-                        createMarker(f.getLastPosition(), name);
-                        Log.i(TAG, f.getName() + " " + f.getUserID() + " " + f.getLastPosition());
-                    }
+                    //list.add(next.getValue(Friend.class));
+                    //for (Friend f : list){
+                      //  String name = f.getName();
+                      //  String uid = f.getUserID();
+
+                        //createMarker(getFriendsPosition(uid), name);
+                        //Log.i(TAG, f.getName() + " " + f.getUserID() + " " + f.getLastPosition());
+                    //}
+                    String name = next.child("name").getValue(String.class);
+                    String uid = next.child("userID").getValue(String.class);
+                    LatLng location = position(uid);
+                    Log.i(TAG,name + " " + location);
+                    map.addMarker(new MarkerOptions().position(location).title(name));
 
 
                 }
@@ -156,8 +163,27 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 
     }
 
+    /*
     private Marker createMarker(LatLng location, String title){
         return map.addMarker(new MarkerOptions().position(location).title(title));
+    } */
+
+    private LatLng position(String id){
+        DatabaseReference ref = database.child(id).child("Location/");
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                pos = new LatLng(dataSnapshot.child("latitude").getValue(Long.class),
+                                dataSnapshot.child("longitude").getValue(Long.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return pos;
     }
 
     private LatLng getPosition(){
