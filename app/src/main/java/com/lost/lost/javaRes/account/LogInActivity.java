@@ -30,7 +30,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private EditText mEmailField;
     private EditText mPasswordField;
     private TextView mTextView;
-    private CheckBox remember;
 
     private FirebaseAuth mAuth;
 
@@ -51,7 +50,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         findViewById(com.lost.lost.R.id.auth_create_button).setOnClickListener(this);
         findViewById(com.lost.lost.R.id.auth_logIn_button).setOnClickListener(this);
         findViewById(com.lost.lost.R.id.auth_password_reset).setOnClickListener(this);
-        findViewById(R.id.checkBox);
 
         //init auth
         mAuth = FirebaseAuth.getInstance();

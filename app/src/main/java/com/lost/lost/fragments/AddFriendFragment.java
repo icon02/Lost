@@ -114,7 +114,7 @@ public class AddFriendFragment extends FragmentPassObject implements View.OnClic
         } else if (id == R.id.button2){
             // get string from scanner and textField and put in friendslist
             addNewFriend(friendsID, nameText.getText().toString());
-            Toast.makeText(this.getActivity(), "Added Friend" + nameText.getText().toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.getActivity(), "Added Friend: " + nameText.getText().toString(), Toast.LENGTH_SHORT).show();
         }
 
 

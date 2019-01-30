@@ -91,6 +91,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                             Toast.makeText(CreateAccountActivity.this, "Please confirm email and then log in!", Toast.LENGTH_SHORT).show();
                             createDbRef(user.getUid());
                             createdAccount();
+                            FirebaseAuth.getInstance().signOut();
                         } else {
                             Log.w(TAG, "createWithEmail:failure", task.getException());
                             Toast.makeText(CreateAccountActivity.this, "Authentification failed!",

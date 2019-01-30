@@ -53,9 +53,9 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
     private DatabaseReference myRef = database.child(uID).child("Location/");
     private DatabaseReference friendsList = database.child(uID).child("Friends/");
 
-    private double lat, lng;
+    private long lat, lng;
 
-    private double fLat, fLng;
+    private long fLat, fLng;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -102,7 +102,10 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
                 for(DataSnapshot s : dataSnapshot.getChildren()){
                     Friend f = s.getValue(Friend.class);
                     LatLng location = getFriendsPosition(f.getUserID());
-                    map.addMarker(new MarkerOptions().position(location).title(s.getKey()));
+                    boolean checked = s.getValue(Boolean.class);
+                    if (checked) {
+                        map.addMarker(new MarkerOptions().position(location).title(s.getKey()));
+                    }
                 }
             }
 
@@ -121,7 +124,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
-                    fLat = dataSnapshot.getValue(Double.class);
+                    fLat = dataSnapshot.getValue(Long.class);
                 }
             }
 
@@ -135,7 +138,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null) {
-                    fLng = dataSnapshot.getValue(Double.class);
+                    fLng = dataSnapshot.getValue(Long.class);
                 }
             }
 
@@ -156,7 +159,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null){
-                    lat = dataSnapshot.getValue(Double.class);
+                    lat = dataSnapshot.getValue(Long.class);
                 }
             }
 
@@ -170,7 +173,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot != null){
-                    lng = dataSnapshot.getValue(Double.class);
+                    lng = dataSnapshot.getValue(Long.class);
                 }
             }
 
