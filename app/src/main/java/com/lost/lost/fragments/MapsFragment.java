@@ -87,10 +87,10 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 
         // Add a marker in Sydney and move the camera TODO
         LatLng mySelf = getPosition();
-        
+        map.setMyLocationEnabled(true);
         if(ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
            //GPS permission granted
-            map.setMyLocationEnabled(true);
+           // map.setMyLocationEnabled(true);
         } else {
             //GPS permission denied
 
@@ -149,7 +149,7 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
                     String uid = next.child("userID").getValue(String.class);
                     LatLng location = position(uid);
                     Log.i(TAG,name + " " + location);
-                    map.addMarker(new MarkerOptions().position(location).title(name));
+                    if(location != null) map.addMarker(new MarkerOptions().position(location).title(name));
 
 
                 }
@@ -186,7 +186,8 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
         return pos;
     }
 
-    private LatLng getPosition(){
+
+    public LatLng getPosition(){
 
         myRef.child("latitude").addValueEventListener(new ValueEventListener() {
             @Override

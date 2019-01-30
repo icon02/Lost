@@ -76,7 +76,7 @@ public class ChatController {
             connectThread = null;
         }
 
-        // Cancel any running thresd
+        // Cancel any running thread
         if (connectedThread != null) {
             connectedThread.cancel();
             connectedThread = null;
@@ -334,6 +334,7 @@ public class ChatController {
                     bytes = inputStream.read(buffer);
                     String msg = new String(buffer);
                     Log.i("STRINGMESSAGE", "STRINGMESSAGE: " + msg);
+
                     // Send the obtained bytes to the UI Activity
                     handler.obtainMessage(EmergencyActivity.MESSAGE_READ, bytes, -1,
                             buffer).sendToTarget();

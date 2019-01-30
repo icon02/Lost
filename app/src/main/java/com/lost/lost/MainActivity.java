@@ -37,10 +37,16 @@ import com.lost.lost.javaRes.account.LogInActivity;
 import com.lost.lost.javaRes.mainApp.MainApp;
 import com.lost.lost.javaRes.services.SplashActivity;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final int REFRESH_RATE = 2000; //2 sec
     private static final int REQUEST_CHECK_SETTINGS = 0x1;
+
+    public static final String KEY_POS = "position";
+    public static final String KEY_UID = "uid";
 
     public MainApp app;
     public FragmentManager fragmentManager;
@@ -59,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String uID;
 
     private GoogleApiClient mGoogleApiClient;
+
+    Timer timer;
+    TimerTask btVisibility;
 
     //private DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(uID);
 
@@ -121,6 +130,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         */
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        makeBTDeviceVisible();
+        timer = new Timer();
+        btVisibility = new TimerTask() {
+            @Override
+            public void run() {
+                makeBTDeviceVisible();
+            }
+        };
+        timer.schedule(btVisibility, 3600000);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        /*
+        makeBTDeviceVisible();
+        timer = null;
+        btVisibility = null;
+        timer = new Timer();
+        btVisibility = new TimerTask() {
+            @Override
+            public void run() {
+                makeBTDeviceVisible();
+            }
+        };
+        timer.schedule(btVisibility, 3600000);
+        */
+    }
+
+
+    private void makeBTDeviceVisible() {
+        Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+        discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 3600);
+        startActivity(discoverableIntent);
+    }
 
 
     private void init() {
@@ -140,12 +187,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onPause() {
         super.onPause();
+        timer = null;
+        btVisibility = null;
         System.gc();
         //TODO disable AccessPoint and reset/write old AccessPoint-Settings
     }
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         super.onDestroy();
         System.gc();
         //TODO disable AccessPoint and reset/write old AccessPoint-Settings
@@ -207,6 +257,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_emergency) {
             //TODO enter Emergency Activity
             Intent emergency = new Intent(this, EmergencyActivity.class);
+            emergency.putExtra(KEY_UID, uID);
+            emergency.putExtra(KEY_POS, mapsFragment.getPosition());
             startActivity(emergency);
             //fragmentManager.beginTransaction().replace(R.id.fragment_container, deviceListFragment).commit();
         } else if (id == R.id.nav_manage) {

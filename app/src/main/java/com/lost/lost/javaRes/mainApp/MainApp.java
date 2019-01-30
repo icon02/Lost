@@ -25,7 +25,6 @@ public class MainApp {
     private static final int TIME_UNTIL_EMERGENCY = 15000; //15sek
     private long timeOutOfInternet;
     private boolean ermergencyRunning;
-    private Emergency emergencyMode;
 
     private WifiManager wifiManager;
     private WifiConfiguration wifiCofnig;
@@ -55,7 +54,6 @@ public class MainApp {
         ermergencyRunning = false;
         wifiManager = (WifiManager)mainActivity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiCofnig = new WifiConfiguration();
-        emergencyMode = new Emergency(wifiManager);
 
 
         refreshTasks = new TimerTask() {
@@ -69,8 +67,6 @@ public class MainApp {
                     } else {
                         if(SystemClock.currentThreadTimeMillis() - timeOutOfInternet >= TIME_UNTIL_EMERGENCY) {
                             //TODO stop/interrupt wifi hotspot
-
-                            emergencyMode.run();
 
                         }
                     }
