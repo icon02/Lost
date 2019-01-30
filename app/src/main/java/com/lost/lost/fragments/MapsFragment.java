@@ -169,11 +169,14 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
     } */
 
     private LatLng position(String id){
-        DatabaseReference ref = database.child(id).child("Location/");
-
+        DatabaseReference ref = database;
+        if (database.child(id) != null) {
+            ref = database.child(id).child("Location/");
+        }
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 pos = new LatLng(dataSnapshot.child("latitude").getValue(Long.class),
                                 dataSnapshot.child("longitude").getValue(Long.class));
             }
