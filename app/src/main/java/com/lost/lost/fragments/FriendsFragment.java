@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -34,7 +35,7 @@ public class FriendsFragment extends FragmentPassObject {
 
     private String uid = FirebaseAuth.getInstance().getUid();
 
-    private Switch aSwitch;
+    private CheckBox checkBox;
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference myRef = mDatabase.child("Users/").child(uid).child("Friends/");
@@ -45,6 +46,7 @@ public class FriendsFragment extends FragmentPassObject {
     private ArrayList<Friend> friendlist = new ArrayList<>();
 
     private boolean value;
+    private int selectedposition = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class FriendsFragment extends FragmentPassObject {
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull Friend model) {
                 friendlist.add(model);
                 holder.setNameText(model.getName());
-                aSwitch = holder.getaSwitch();
+                checkBox = holder.getCheckBox();
                 checkRef = myRef.child(model.getName()).child("enabled");
 
                 checkRef.addValueEventListener(new ValueEventListener() {
@@ -88,11 +90,14 @@ public class FriendsFragment extends FragmentPassObject {
                     }
                 });
 
-                aSwitch.setChecked(value);
-                aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                if (selectedposition == position) {
+                    checkBox.setChecked(value);
+                }
+
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(isChecked){
+                        if (isChecked) {
                             checkRef.setValue(true);
                         } else {
                             checkRef.setValue(false);

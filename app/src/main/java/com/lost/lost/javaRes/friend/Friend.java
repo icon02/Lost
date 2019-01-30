@@ -28,6 +28,8 @@ public class Friend {
         return userID;
     }
 
+    public void setPos(LatLng pos){ this.pos = pos;}
+
     public LatLng getLastPosition() {
         return pos;
     }

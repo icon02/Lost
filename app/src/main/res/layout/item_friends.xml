@@ -31,16 +31,14 @@
             android:textSize="10pt"
             android:textStyle="bold" />
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:checked="true"
-            android:paddingRight="4pt"
-            android:textAlignment="viewEnd" />
-    </LinearLayout>
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Show" />
+
+</LinearLayout>
 <!-->
 </RelativeLayout>
 <-->

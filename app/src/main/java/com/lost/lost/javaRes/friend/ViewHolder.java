@@ -3,6 +3,7 @@ package com.lost.lost.javaRes.friend;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -14,19 +15,19 @@ import org.w3c.dom.Text;
 public class ViewHolder extends RecyclerView.ViewHolder {
 
     private TextView textView;
-    private Switch aSwitch;
+    private CheckBox checkBox;
 
     public ViewHolder(View itemView) {
         super(itemView);
         textView = itemView.findViewById(R.id.textView_name);
-        aSwitch = itemView.findViewById(R.id.switch1);
+        checkBox = itemView.findViewById(R.id.checkBox);
     }
 
     public void setNameText(String name){
         textView.setText(name);
     }
 
-    public Switch getaSwitch(){
-        return aSwitch;
+    public CheckBox getCheckBox(){
+        return checkBox;
     }
 }

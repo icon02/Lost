@@ -9,6 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.BoringLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +36,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.lost.lost.R;
 import com.lost.lost.javaRes.friend.Friend;
 import com.lost.lost.javaRes.friend.ViewHolder;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class MapsFragment extends FragmentPassObject implements OnMapReadyCallback {
@@ -56,6 +60,9 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
     private long lat, lng;
 
     private long fLat, fLng;
+
+    private static final String TAG = "friends";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -95,15 +102,15 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
             //Thread.sleep(3000);
         } catch(Exception e) {}
 */
-
+/*
         friendsList.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot s : dataSnapshot.getChildren()){
                     Friend f = s.getValue(Friend.class);
                     LatLng location = getFriendsPosition(f.getUserID());
-                    //boolean checked = s.child(f.getName()).child("enabled").getValue(Boolean.class);
-                    //if (checked) {
+                   // String checked = s.child(f.getName()).child("enabled").getValue(String.class);
+                    //if (checked.equals("true")) {
                         map.addMarker(new MarkerOptions().position(location).title(s.getKey()));
                     //}
                 }
@@ -114,8 +121,43 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
 
             }
         });
+        */
         //map.animateCamera(CameraUpdateFactory.zoomTo(16f));
 
+        Query query = friendsList.orderByKey();
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
+                ArrayList<Friend> list = new ArrayList<>();
+
+                while (iterator.hasNext()){
+                    DataSnapshot next = iterator.next();
+                    Log.i(TAG, "Friend = " + next.getValue());
+                    list.add(next.getValue(Friend.class));
+                    for (Friend f : list){
+                        String name = f.getName();
+                        String uid = f.getUserID();
+                        f.setPos(getFriendsPosition(uid));
+                        createMarker(f.getLastPosition(), name);
+                        Log.i(TAG, f.getName() + " " + f.getUserID() + " " + f.getLastPosition());
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private Marker createMarker(LatLng location, String title){
+        return map.addMarker(new MarkerOptions().position(location).title(title));
     }
 
     private LatLng getPosition(){
