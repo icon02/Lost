@@ -186,9 +186,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FirebaseAuth.getInstance().signOut();
             Intent logOut = new Intent(this, LogInActivity.class);
             startActivity(logOut);
-        } else if (id == R.id.refresh){
-            Intent refresh = new Intent(this, MapsFragment.class);
-            startActivity(refresh);
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,59 +1,59 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
+ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:1-15:12
 	package
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:3:7-44
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:3:7-44
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:5:7-32
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:5:7-32
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:11-69
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:4:7-30
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:4:7-30
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
 uses-permission#android.permission.CAMERA
-ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:7:5-64
+ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:7:5-64
 	android:name
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:7:22-62
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:7:22-62
 uses-feature#android.hardware.camera
-ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:8:5-60
+ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:8:5-60
 	android:name
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:8:19-57
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:8:19-57
 application
-ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:10:5-14:19
+ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:10:5-14:19
 	android:label
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:10:18-50
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:10:18-50
 	android:icon
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:10:51-87
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:10:51-87
 activity#com.dm.zbar.android.scanner.ZBarScannerActivity
-ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:11:9-13:54
+ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:11:9-13:54
 	android:screenOrientation
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:12:19-56
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:12:19-56
 	android:label
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:13:19-51
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:13:19-51
 	android:name
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:11:19-53
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml:11:19-53
 uses-sdk
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\Standrechner\Desktop\gitRepos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Alex\Desktop\repos\mobileComputing\Lost\zBarScannerLibrary\src\main\AndroidManifest.xml

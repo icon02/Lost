@@ -13,8 +13,4 @@
         android:id="@+id/action_logOut"
         android:orderInCategory="101"
         android:title="@string/logOut" />
-    <item
-        android:id="@+id/refresh"
-        android:orderInCategory="102"
-        android:title="Refresh Map" />
 </menu>

@@ -102,10 +102,10 @@ public class MapsFragment extends FragmentPassObject implements OnMapReadyCallba
                 for(DataSnapshot s : dataSnapshot.getChildren()){
                     Friend f = s.getValue(Friend.class);
                     LatLng location = getFriendsPosition(f.getUserID());
-                    boolean checked = s.getValue(Boolean.class);
-                    if (checked) {
+                    //boolean checked = s.child(f.getName()).child("enabled").getValue(Boolean.class);
+                    //if (checked) {
                         map.addMarker(new MarkerOptions().position(location).title(s.getKey()));
-                    }
+                    //}
                 }
             }
 
